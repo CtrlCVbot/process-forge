@@ -212,6 +212,9 @@ process-forge/
 │   │
 │   └── templates/                # 문서 템플릿
 │       ├── TEMPLATE-RULES.md     #   └─ 템플릿 작성/사용 규칙
+│       ├── TPL-idea.md           #   └─ 아이디어(IDEA) 템플릿
+│       ├── TPL-proposal.md       #   └─ 제안서(PROP) 템플릿
+│       ├── TPL-report.md         #   └─ 검증리포트(RPT) 템플릿
 │       ├── TPL-policy.md         #   └─ 정책(POL) 템플릿
 │       ├── TPL-process.md        #   └─ 프로세스(PRC) 템플릿
 │       ├── TPL-rule.md           #   └─ 규칙(RUL) 템플릿
@@ -222,6 +225,15 @@ process-forge/
 │  ══════════════════════════════════════════════════════════
 │
 ├── docs/                         # 📄 산출물 저장소
+│   │
+│   ├── ideas/                    # 아이디어 메모 (자유 파일명)
+│   │   └── (자유로운 아이디어 문서)
+│   │
+│   ├── proposals/                # 제안서 (PROP)
+│   │   └── PROP-hrops-001.md     #   └─ 예: 인사 운영 제안서
+│   │
+│   ├── reports/                  # 검증 리포트 (RPT)
+│   │   └── RPT-hrops-001.md      #   └─ 예: 전환 검증 리포트
 │   │
 │   ├── policies/                 # 정책 문서 (POL)
 │   │   └── POL-docops-001.md     #   └─ 예: 문서 운영 정책
@@ -313,6 +325,9 @@ process-forge/
 | 파일 | 용도 |
 |------|------|
 | `TEMPLATE-RULES.md` | 템플릿 작성/사용 규칙 |
+| `TPL-idea.md` | 아이디어 메모 작성 시 사용 |
+| `TPL-proposal.md` | 제안서 작성 시 사용 |
+| `TPL-report.md` | 검증 리포트 작성 시 사용 |
 | `TPL-policy.md` | 정책 문서 작성 시 사용 |
 | `TPL-process.md` | 프로세스 문서 작성 시 사용 |
 | `TPL-rule.md` | 규칙 문서 작성 시 사용 |
@@ -322,10 +337,29 @@ process-forge/
 
 ### 3. `docs/` - 산출물 저장소
 
-실제로 작성된 정책/프로세스/규칙/변경 문서들이 저장되는 곳입니다.
+실제로 작성된 문서들이 저장되는 곳입니다.
+
+#### 3.1 문서 생산 파이프라인
+
+```
+ideas/ → proposals/ → [검증 RPT] → Draft → Review → Approved
+(자유)    (구조화)      (reports/)
+```
+
+| 단계 | 폴더 | 설명 |
+|------|------|------|
+| 아이디어 | `docs/ideas/` | 자유로운 메모 (파일명 자유) |
+| 제안서 | `docs/proposals/` | 아이디어 통합/구조화 (PROP-*) |
+| 검증 | `docs/reports/` | 표준문서 전환 적합성 검증 (RPT-*) |
+| 표준문서 | `docs/{type}/` | POL/PRC/RUL로 전환 |
+
+#### 3.2 폴더별 문서 유형
 
 | 폴더 | 문서 유형 | docId 접두사 | 예시 |
 |------|----------|-------------|------|
+| `ideas/` | 아이디어 | 자유 파일명 | `인사개선-아이디어.md` |
+| `proposals/` | 제안서 | `PROP-` | `PROP-hrops-001.md` |
+| `reports/` | 검증 리포트 | `RPT-` | `RPT-hrops-001.md` |
 | `policies/` | 정책 (Why) | `POL-` | `POL-docops-001.md` |
 | `processes/` | 프로세스 (How) | `PRC-` | `PRC-planops-001.md` |
 | `rules/` | 개별 규칙 | `RUL-` | `RUL-docid-001.md` |
@@ -364,7 +398,7 @@ process-forge/
                       ▼
 ┌─────────────────────────────────────────────────────────────┐
 │  docs/ 에 산출물 생성                                        │
-│  (policies/ | processes/ | rules/ | changes/)               │
+│  (ideas/ | proposals/ | reports/ | policies/ | ...)         │
 └─────────────────────────────────────────────────────────────┘
 ```
 

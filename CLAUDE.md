@@ -51,9 +51,28 @@
 └── templates/          # 문서 템플릿
 
 docs/
+├── ideas/              # 아이디어 메모 (자유 파일명)
+├── proposals/          # 제안서 (PROP-*)
+├── reports/            # 검증 리포트 (RPT-*)
 ├── policies/           # 정책 문서 (POL-*)
 ├── processes/          # 프로세스 문서 (PRC-*)
 ├── rules/              # 규칙 문서 (RUL-*)
 ├── changes/            # 변경 요청 (CHG-*)
 └── archive/            # 폐기 문서
 ```
+
+---
+
+## 문서 생산 파이프라인
+
+```
+ideas/ → proposals/ → [검증 RPT] → Draft → Review → Approved
+(자유)    (구조화)      (reports/)
+```
+
+| 단계 | 폴더 | 설명 |
+|------|------|------|
+| 아이디어 | `docs/ideas/` | 자유로운 메모 (파일명 자유) |
+| 제안서 | `docs/proposals/` | 아이디어 통합/구조화 (PROP-*) |
+| 검증 | `docs/reports/` | 표준문서 전환 적합성 검증 (RPT-*) |
+| 표준문서 | `docs/{type}/` | POL/PRC/RUL로 전환 |

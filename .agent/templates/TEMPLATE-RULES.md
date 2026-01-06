@@ -22,12 +22,15 @@ TPL-{문서유형}.md
 
 ### 2.2 현재 템플릿 목록
 
-| 파일명 | 대상 문서 유형 |
-|--------|---------------|
-| `TPL-policy.md` | POL (정책) |
-| `TPL-process.md` | PRC (프로세스) |
-| `TPL-rule.md` | RUL (규칙) |
-| `TPL-change.md` | CHG (변경요청) |
+| 파일명 | 대상 문서 유형 | 저장 위치 |
+|--------|---------------|----------|
+| `TPL-idea.md` | IDEA (아이디어) | `docs/ideas/` |
+| `TPL-proposal.md` | PROP (제안서) | `docs/proposals/` |
+| `TPL-report.md` | RPT (검증 리포트) | `docs/reports/` |
+| `TPL-policy.md` | POL (정책) | `docs/policies/` |
+| `TPL-process.md` | PRC (프로세스) | `docs/processes/` |
+| `TPL-rule.md` | RUL (규칙) | `docs/rules/` |
+| `TPL-change.md` | CHG (변경요청) | `docs/changes/` |
 
 ---
 
@@ -78,6 +81,9 @@ TPL-{문서유형}.md
 
 | 섹션 | 적용 문서 |
 |------|----------|
+| 배경/동기 | IDEA |
+| 제안 내용 | PROP |
+| 검증 항목/전환 판정 | RPT |
 | 정책 내용 | POL |
 | 프로세스 단계 | PRC |
 | 규칙 내용 | RUL |
@@ -149,12 +155,15 @@ impact: High | Medium | Low
 
 ### 6.2 저장 위치
 
-| 문서 유형 | 저장 위치 |
-|----------|----------|
-| POL | `docs/policies/` |
-| PRC | `docs/processes/` |
-| RUL | `docs/rules/` |
-| CHG | `docs/changes/` |
+| 문서 유형 | 저장 위치 | 파일명 규칙 |
+|----------|----------|------------|
+| IDEA | `docs/ideas/` | 자유 파일명 |
+| PROP | `docs/proposals/` | `PROP-{domain}-{seq}.md` |
+| RPT | `docs/reports/` | `RPT-{domain}-{seq}.md` |
+| POL | `docs/policies/` | `POL-{domain}-{seq}.md` |
+| PRC | `docs/processes/` | `PRC-{domain}-{seq}.md` |
+| RUL | `docs/rules/` | `RUL-{domain}-{seq}.md` |
+| CHG | `docs/changes/` | `CHG-{domain}-{seq}-{변경seq}.md` |
 
 ---
 
@@ -177,14 +186,13 @@ impact: High | Medium | Low
 ### 8.1 문서 생성 요청 시
 
 ```
-1. 문서 유형 확인 (POL/PRC/RUL/CHG)
+1. 문서 유형 확인 (IDEA/PROP/RPT/POL/PRC/RUL/CHG)
 2. 해당 템플릿 로드
 3. 사용자에게 필수 정보 요청:
-   - docId (domain, seq)
-   - Owner
-   - 핵심 내용
+   - IDEA: 자유 (파일명, 내용)
+   - PROP/RPT/POL/PRC/RUL/CHG: docId (domain, seq), Owner, 핵심 내용
 4. 템플릿 기반 문서 생성
-5. 플레이스홀더 완전 교체 확인
+5. 플레이스홀더 완전 교체 확인 (IDEA 제외)
 ```
 
 ### 8.2 템플릿 기반 검증
