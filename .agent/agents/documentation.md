@@ -1,7 +1,7 @@
 ---
 name: documentation
 description: 프로세스 정보를 표준 문서(POL/PRC/RUL)로 작성하고 검증합니다. "문서로 만들어줘", "문서화해줘", "정책/프로세스/규칙 문서 작성해줘", "표준 문서로 정리" 요청 시 사용합니다.
-model: sonnet
+model: opus
 skills: process-documenter, governance-auditor
 ---
 

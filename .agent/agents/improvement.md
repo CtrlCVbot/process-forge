@@ -1,7 +1,7 @@
 ---
 name: improvement
 description: 기존 프로세스의 문제점을 분석하고 개선안을 도출합니다. "프로세스 개선해줘", "문제점 찾고 개선해줘", "프로세스 최적화", "프로세스 품질 개선" 요청 시 사용합니다.
-model: sonnet
+model: opus
 skills: process-analyzer, process-designer, governance-auditor
 ---
 

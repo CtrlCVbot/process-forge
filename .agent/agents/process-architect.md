@@ -1,7 +1,7 @@
 ---
 name: process-architect
 description: 프로세스 분석부터 설계, 검증까지 End-to-End로 관리합니다. "프로세스 전체 검토해줘", "새 프로세스 만들고 검증까지", "프로세스 종합 설계" 요청 시 사용합니다.
-model: sonnet
+model: opus
 skills: process-analyzer, process-designer, governance-auditor
 ---
 
