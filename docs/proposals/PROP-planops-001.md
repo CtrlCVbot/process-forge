@@ -55,18 +55,43 @@ related_ideas:
 | **Active Cycle 필터** | 모든 뷰는 `Cycle Status = Active` 필터 사용 |
 | **Gate 기반 품질** | 다음 단계 진입 전 Gate 조건 충족 필수 |
 
-### 2.2 Notion DB 구조 (4개 DB)
+### 2.2 Notion DB 구조 (4개 DB - 3단계 핵심 흐름)
 
 ```
-Cycles (1) ── (N) Initiatives (1) ── (N) Phases (1) ── (N) Ops Tasks
+[핵심 운영 흐름 - 3단계]
+Cycles (1) ── (N) Phases (1) ── (N) Ops Tasks
+
+[포트폴리오 참조 - 선택적]
+Phases ──(optional)── Initiatives
 ```
 
-| DB | 역할 | 핵심 속성 |
+> **개선 포인트**: 기존 4단계(Cycle→Initiative→Phase→Task) 구조에서 3단계로 단순화.
+> Initiative는 큰 계획 묶음이 필요할 때만 선택적으로 사용.
+
+| DB | 역할 | 핵심 관계 |
 |----|------|----------|
-| **Cycles** | 기간 컨테이너 | Name, Start, End, Status(Planned/Active/Done), Owner |
-| **Initiatives** | 큰 계획 단위 | Cycle, Status, Priority, Outcome, PM Owner, Tech Owner, docId |
-| **Phases** | 일정의 실체 | Initiative, Type(Spec/Dev/QA/Release), Start, End, Gate, Owner |
-| **Ops Tasks** | 주간 실행 | Phase, Status, Owner, Due, DoD |
+| **Cycles** | 기간 컨테이너 | - |
+| **Phases** | 일정의 실체 (마스터 플랜) | Cycle (필수), Initiative (선택) |
+| **Ops Tasks** | 주간 실행 티켓 | Phase (필수) |
+| **Initiatives** | 큰 계획 묶음 (포트폴리오) | Cycle (필수), Phases에서 역참조 |
+
+### 2.2.1 DB별 핵심 속성
+
+| DB | 핵심 속성 |
+|----|----------|
+| **Cycles** | Name, Start, End, Status(Planned/Active/Done), Owner |
+| **Phases** | Cycle, Type(Spec/Dev/QA/Release), Start, End, Gate, Owner, Initiative(선택) |
+| **Ops Tasks** | Phase, Status, Owner, Due, DoD |
+| **Initiatives** | Cycle, Status, Priority, Outcome, PM Owner, Tech Owner, docId |
+
+### 2.2.2 구조 단순화 장점
+
+| 항목 | 기존 (4단계) | 개선 (3단계) |
+|------|-------------|-------------|
+| Rollup 경로 | Task→Phase→Initiative→Cycle | Task→Phase→Cycle |
+| Active Cycle 필터 | 3단계 경유 | 2단계 직접 |
+| 작은 작업 | Initiative 필수 생성 | Phase만으로 운영 가능 |
+| Notion 성능 | Rollup 복잡 | Rollup 단순화 |
 
 ### 2.3 표준 뷰 (모두 Active Cycle 필터)
 
