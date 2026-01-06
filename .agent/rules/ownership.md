@@ -167,9 +167,20 @@ updated: 2026-01-06
 
 ---
 
-## 8. Owner 미지정 문서 처리
+## 8. 관련 규칙
 
-### 8.1 발견 시 조치
+| 규칙 | 연관성 |
+|------|--------|
+| `document-schema.md` | Owner 메타데이터 형식 정의 |
+| `change-control.md` | Owner 승인 권한, CHG 프로세스 |
+| `lifecycle.md` | 상태 전환 시 Owner 책임 |
+| `quality-gate.md` | Owner 지정 검증 항목 |
+
+---
+
+## 9. Owner 미지정 문서 처리
+
+### 9.1 발견 시 조치
 
 ```
 1. 해당 문서를 Draft 상태로 변경
@@ -177,6 +188,6 @@ updated: 2026-01-06
 3. 7일 내 Owner 미지정 시 Archive 검토
 ```
 
-### 8.2 예외
+### 9.2 예외
 - `.agent/` 내 메타 규칙 파일: 프로젝트 관리자가 Owner
 - 템플릿 파일: 프로젝트 관리자가 Owner

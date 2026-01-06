@@ -246,3 +246,14 @@ created: 2026-01-06
 - Owner만 수행 가능
 - 변경 이력에 "Minor fix" 기록
 - 버전 변경 없음
+
+---
+
+## 11. 관련 규칙
+
+| 규칙 | 연관성 |
+|------|--------|
+| `ownership.md` | Owner 승인 권한, CHG 승인자 정의 |
+| `document-schema.md` | CHG docId 형식 정의 |
+| `lifecycle.md` | Approved 상태 정의, 상태 전환 규칙 |
+| `quality-gate.md` | CHG 문서 체크리스트 |

@@ -185,3 +185,14 @@ docs/processes/
 ### 8.2 메타 규칙 파일
 - `.agent/rules/` 내 파일은 docId 없이 직접 명명
 - 예: `document-schema.md`, `ownership.md`
+
+---
+
+## 9. 관련 규칙
+
+| 규칙 | 연관성 |
+|------|--------|
+| `ownership.md` | Owner 메타데이터 정의 |
+| `change-control.md` | CHG docId 특수 형식 |
+| `lifecycle.md` | 문서 상태 값 정의 |
+| `quality-gate.md` | docId 형식 검증 항목 |

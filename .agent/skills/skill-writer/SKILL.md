@@ -365,21 +365,103 @@ description: 모범 사례에 따라 REST API를 설계합니다. API 엔드포�
 
 ## 예시
 
-완전한 예시는 문서 참조:
-- 간단한 단일 파일 스킬 (commit-helper)
-- 도구 권한이 있는 스킬 (code-reviewer)
-- 다중 파일 스킬 (pdf-processing)
+### 완전한 예시: commit-helper 스킬
+
+```markdown
+---
+name: commit-helper
+description: Git 커밋 메시지 작성을 도와줍니다. "커밋해줘", "커밋 메시지 만들어줘", git commit 관련 요청 시 사용합니다.
+---
+
+# 커밋 도우미
+
+Git 커밋 메시지를 컨벤션에 맞게 작성합니다.
+
+## 지침
+
+1. `git diff --staged`로 변경사항 확인
+2. 변경 유형 파악 (feat/fix/docs/refactor/test/chore)
+3. 50자 이내 제목 작성
+4. 필요시 본문에 상세 설명 추가
+
+## 커밋 메시지 형식
+
+```
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+## 예시
+
+```bash
+feat(auth): 소셜 로그인 기능 추가
+
+- Google OAuth 연동
+- Kakao 로그인 지원
+- 세션 관리 로직 개선
+
+Closes #123
+```
+```
+
+### 추가 예시 참조
+
+- **읽기 전용 스킬**: code-reader (allowed-tools 활용)
+- **스크립트 기반 스킬**: data-processor (헬퍼 스크립트 연동)
+- **다중 파일 스킬**: api-designer (점진적 공개)
 
 ## 출력 형식
 
-스킬 생성 시, 다음을 수행합니다:
+스킬 생성 완료 시 다음 형식으로 결과를 제시합니다:
 
-1. 범위와 요구사항에 대해 명확한 질문
-2. 스킬 이름과 위치 제안
-3. 적절한 frontmatter로 SKILL.md 파일 생성
-4. 명확한 지침과 예시 포함
-5. 필요시 지원 파일 추가
-6. 테스트 지침 제공
-7. 모든 요구사항에 대해 검증
+### 1. 스킬 요약
+
+```markdown
+## 스킬 생성 완료: {{skill-name}}
+
+| 항목 | 내용 |
+|------|------|
+| 스킬명 | {{skill-name}} |
+| 위치 | {{location}} |
+| 유형 | 개인용/프로젝트용 |
+| 도구 제한 | 없음 / {{allowed-tools}} |
+```
+
+### 2. 생성된 파일 목록
+
+```markdown
+### 생성된 파일
+- `{{location}}/SKILL.md` - 메인 스킬 파일
+- `{{location}}/reference.md` - 상세 참조 (선택)
+- `{{location}}/examples.md` - 추가 예시 (선택)
+```
+
+### 3. 검증 결과
+
+```markdown
+### 검증 체크리스트
+| 항목 | 상태 |
+|------|------|
+| name 규칙 준수 | ✅ |
+| description 포함 | ✅ |
+| YAML 유효성 | ✅ |
+| 지침 구조화 | ✅ |
+| 예시 포함 | ✅ |
+| 의존성 문서화 | ✅/N/A |
+```
+
+### 4. 테스트 안내
+
+```markdown
+### 다음 단계
+1. Claude Code 재시작 (스킬 로드)
+2. 다음 질문으로 테스트:
+   - "{{트리거 예시 1}}"
+   - "{{트리거 예시 2}}"
+3. 스킬 활성화 및 동작 확인
+```
 
 결과물은 모든 모범 사례와 검증 규칙을 따르는 완전하고 작동하는 스킬입니다.

@@ -34,6 +34,38 @@ skills: process-documenter, governance-auditor
 
 ## 출력 형식
 
-1. 완성된 문서 (POL/PRC/RUL)
-2. 검증 결과
-3. 저장 안내 (`docs/{type}/{docId}.md`)
+### 1. 완성된 문서
+
+해당 유형의 템플릿 형식으로 출력:
+- POL: TPL-policy.md 형식
+- PRC: TPL-process.md 형식
+- RUL: TPL-rule.md 형식
+
+### 2. 검증 결과
+
+```markdown
+## 거버넌스 검증 결과: {{docId}}
+
+### 검증 요약
+| 구분 | 준수 | 위반 | 권고 |
+|------|------|------|------|
+| 소유권 규칙 | X | X | X |
+| 문서 체계 규칙 | X | X | X |
+| **합계** | **X** | **X** | **X** |
+
+**준수율**: X% (판정: 완전 준수/부분 준수/미흡)
+```
+
+### 3. 저장 안내
+
+```markdown
+## 문서화 완료
+
+**생성된 문서**: {{docId}}
+**저장 위치**: `docs/{{type}}/{{docId}}.md`
+
+### 다음 단계
+1. 이해관계자 검토 요청
+2. Draft → Review 상태 변경
+3. Review → Approved 승인 요청
+```
