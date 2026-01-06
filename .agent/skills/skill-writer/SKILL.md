@@ -1,385 +1,385 @@
 ---
 name: skill-writer
-description: Guide users through creating Agent Skills for Claude Code. Use when the user wants to create, write, author, or design a new Skill, or needs help with SKILL.md files, frontmatter, or skill structure.
+description: Claude Code용 에이전트 스킬 작성을 안내합니다. 사용자가 새 스킬을 "만들어줘", "작성해줘", "설계해줘" 요청하거나, SKILL.md 파일, frontmatter, 스킬 구조에 대해 질문할 때 사용합니다.
 ---
 
-# Skill Writer
+# 스킬 작성 도우미
 
-This Skill helps you create well-structured Agent Skills for Claude Code that follow best practices and validation requirements.
+이 스킬은 Claude Code용 에이전트 스킬을 모범 사례와 검증 요구사항에 맞게 작성할 수 있도록 안내합니다.
 
-## When to use this Skill
+## 사용 시점
 
-Use this Skill when:
-- Creating a new Agent Skill
-- Writing or updating SKILL.md files
-- Designing skill structure and frontmatter
-- Troubleshooting skill discovery issues
-- Converting existing prompts or workflows into Skills
+이 스킬을 사용하는 경우:
+- 새로운 에이전트 스킬 생성
+- SKILL.md 파일 작성 또는 수정
+- 스킬 구조 및 frontmatter 설계
+- 스킬 검색 문제 해결
+- 기존 프롬프트나 워크플로우를 스킬로 변환
 
-## Instructions
+## 지침
 
-### Step 1: Determine Skill scope
+### 1단계: 스킬 범위 결정
 
-First, understand what the Skill should do:
+먼저, 스킬이 수행할 작업을 파악합니다:
 
-1. **Ask clarifying questions**:
-   - What specific capability should this Skill provide?
-   - When should Claude use this Skill?
-   - What tools or resources does it need?
-   - Is this for personal use or team sharing?
+1. **명확한 질문하기**:
+   - 이 스킬이 제공해야 할 구체적인 기능은?
+   - Claude가 언제 이 스킬을 사용해야 하는가?
+   - 어떤 도구나 리소스가 필요한가?
+   - 개인용인가, 팀 공유용인가?
 
-2. **Keep it focused**: One Skill = one capability
-   - Good: "PDF form filling", "Excel data analysis"
-   - Too broad: "Document processing", "Data tools"
+2. **범위를 좁게 유지**: 하나의 스킬 = 하나의 기능
+   - 좋은 예: "PDF 양식 작성", "Excel 데이터 분석"
+   - 너무 넓은 예: "문서 처리", "데이터 도구"
 
-### Step 2: Choose Skill location
+### 2단계: 스킬 위치 선택
 
-Determine where to create the Skill:
+스킬을 생성할 위치를 결정합니다:
 
-**Personal Skills** (`~/.claude/skills/`):
-- Individual workflows and preferences
-- Experimental Skills
-- Personal productivity tools
+**개인 스킬** (`~/.claude/skills/`):
+- 개인 워크플로우 및 선호 설정
+- 실험적인 스킬
+- 개인 생산성 도구
 
-**Project Skills** (`.claude/skills/`):
-- Team workflows and conventions
-- Project-specific expertise
-- Shared utilities (committed to git)
+**프로젝트 스킬** (`.claude/skills/` 또는 `.agent/skills/`):
+- 팀 워크플로우 및 규칙
+- 프로젝트별 전문 지식
+- 공유 유틸리티 (git에 커밋)
 
-### Step 3: Create Skill structure
+### 3단계: 스킬 구조 생성
 
-Create the directory and files:
+디렉토리와 파일을 생성합니다:
 
 ```bash
-# Personal
-mkdir -p ~/.claude/skills/skill-name
+# 개인용
+mkdir -p ~/.claude/skills/스킬명
 
-# Project
-mkdir -p .claude/skills/skill-name
+# 프로젝트용
+mkdir -p .agent/skills/스킬명
 ```
 
-For multi-file Skills:
+다중 파일 스킬의 경우:
 ```
-skill-name/
-├── SKILL.md (required)
-├── reference.md (optional)
-├── examples.md (optional)
+스킬명/
+├── SKILL.md (필수)
+├── reference.md (선택)
+├── examples.md (선택)
 ├── scripts/
-│   └── helper.py (optional)
+│   └── helper.py (선택)
 └── templates/
-    └── template.txt (optional)
+    └── template.txt (선택)
 ```
 
-### Step 4: Write SKILL.md frontmatter
+### 4단계: SKILL.md frontmatter 작성
 
-Create YAML frontmatter with required fields:
+필수 필드가 포함된 YAML frontmatter를 작성합니다:
 
 ```yaml
 ---
-name: skill-name
-description: Brief description of what this does and when to use it
+name: 스킬명
+description: 이 스킬이 무엇을 하는지, 언제 사용하는지 간략히 설명
 ---
 ```
 
-**Field requirements**:
+**필드 요구사항**:
 
 - **name**:
-  - Lowercase letters, numbers, hyphens only
-  - Max 64 characters
-  - Must match directory name
-  - Good: `pdf-processor`, `git-commit-helper`
-  - Bad: `PDF_Processor`, `Git Commits!`
+  - 소문자, 숫자, 하이픈만 사용
+  - 최대 64자
+  - 디렉토리명과 일치해야 함
+  - 좋은 예: `pdf-processor`, `git-commit-helper`
+  - 나쁜 예: `PDF_Processor`, `Git Commits!`
 
 - **description**:
-  - Max 1024 characters
-  - Include BOTH what it does AND when to use it
-  - Use specific trigger words users would say
-  - Mention file types, operations, and context
+  - 최대 1024자
+  - 무엇을 하는지와 언제 사용하는지 모두 포함
+  - 사용자가 말할 구체적인 트리거 단어 포함
+  - 파일 유형, 작업, 컨텍스트 언급
 
-**Optional frontmatter fields**:
+**선택적 frontmatter 필드**:
 
-- **allowed-tools**: Restrict tool access (comma-separated list)
+- **allowed-tools**: 도구 접근 제한 (쉼표로 구분)
   ```yaml
   allowed-tools: Read, Grep, Glob
   ```
-  Use for:
-  - Read-only Skills
-  - Security-sensitive workflows
-  - Limited-scope operations
+  사용 사례:
+  - 읽기 전용 스킬
+  - 보안에 민감한 워크플로우
+  - 제한된 범위의 작업
 
-### Step 5: Write effective descriptions
+### 5단계: 효과적인 설명 작성
 
-The description is critical for Claude to discover your Skill.
+설명은 Claude가 스킬을 찾는 데 매우 중요합니다.
 
-**Formula**: `[What it does] + [When to use it] + [Key triggers]`
+**공식**: `[무엇을 하는지] + [언제 사용하는지] + [핵심 트리거]`
 
-**Examples**:
+**예시**:
 
-✅ **Good**:
+✅ **좋은 예**:
 ```yaml
-description: Extract text and tables from PDF files, fill forms, merge documents. Use when working with PDF files or when the user mentions PDFs, forms, or document extraction.
+description: PDF 파일에서 텍스트와 표를 추출하고, 양식을 작성하고, 문서를 병합합니다. PDF 파일 작업 시 또는 사용자가 PDF, 양식, 문서 추출을 언급할 때 사용합니다.
 ```
 
-✅ **Good**:
+✅ **좋은 예**:
 ```yaml
-description: Analyze Excel spreadsheets, create pivot tables, and generate charts. Use when working with Excel files, spreadsheets, or analyzing tabular data in .xlsx format.
+description: Excel 스프레드시트를 분석하고, 피벗 테이블을 만들고, 차트를 생성합니다. Excel 파일, 스프레드시트 작업 시 또는 .xlsx 형식의 표 데이터를 분석할 때 사용합니다.
 ```
 
-❌ **Too vague**:
+❌ **너무 모호한 예**:
 ```yaml
-description: Helps with documents
-description: For data analysis
+description: 문서 관련 도움
+description: 데이터 분석용
 ```
 
-**Tips**:
-- Include specific file extensions (.pdf, .xlsx, .json)
-- Mention common user phrases ("analyze", "extract", "generate")
-- List concrete operations (not generic verbs)
-- Add context clues ("Use when...", "For...")
+**팁**:
+- 구체적인 파일 확장자 포함 (.pdf, .xlsx, .json)
+- 일반적인 사용자 표현 언급 ("분석해줘", "추출해줘", "생성해줘")
+- 구체적인 작업 나열 (일반적인 동사 지양)
+- 컨텍스트 단서 추가 ("~할 때 사용", "~용")
 
-### Step 6: Structure the Skill content
+### 6단계: 스킬 내용 구조화
 
-Use clear Markdown sections:
+명확한 마크다운 섹션을 사용합니다:
 
 ```markdown
-# Skill Name
+# 스킬명
 
-Brief overview of what this Skill does.
+이 스킬이 무엇을 하는지 간략한 개요.
 
-## Quick start
+## 빠른 시작
 
-Provide a simple example to get started immediately.
+즉시 시작할 수 있는 간단한 예시 제공.
 
-## Instructions
+## 지침
 
-Step-by-step guidance for Claude:
-1. First step with clear action
-2. Second step with expected outcome
-3. Handle edge cases
+Claude를 위한 단계별 안내:
+1. 명확한 작업이 포함된 첫 번째 단계
+2. 예상 결과가 포함된 두 번째 단계
+3. 예외 상황 처리
 
-## Examples
+## 예시
 
-Show concrete usage examples with code or commands.
+코드나 명령어가 포함된 구체적인 사용 예시.
 
-## Best practices
+## 모범 사례
 
-- Key conventions to follow
-- Common pitfalls to avoid
-- When to use vs. not use
+- 따라야 할 주요 규칙
+- 피해야 할 일반적인 실수
+- 사용해야 할 때와 사용하지 말아야 할 때
 
-## Requirements
+## 요구사항
 
-List any dependencies or prerequisites:
+의존성이나 전제 조건 나열:
 ```bash
 pip install package-name
 ```
 
-## Advanced usage
+## 고급 사용법
 
-For complex scenarios, see [reference.md](reference.md).
+복잡한 시나리오는 [reference.md](reference.md) 참조.
 ```
 
-### Step 7: Add supporting files (optional)
+### 7단계: 지원 파일 추가 (선택)
 
-Create additional files for progressive disclosure:
+점진적 공개를 위한 추가 파일 생성:
 
-**reference.md**: Detailed API docs, advanced options
-**examples.md**: Extended examples and use cases
-**scripts/**: Helper scripts and utilities
-**templates/**: File templates or boilerplate
+**reference.md**: 상세 API 문서, 고급 옵션
+**examples.md**: 확장된 예시 및 사용 사례
+**scripts/**: 헬퍼 스크립트 및 유틸리티
+**templates/**: 파일 템플릿 또는 상용구
 
-Reference them from SKILL.md:
+SKILL.md에서 참조:
 ```markdown
-For advanced usage, see [reference.md](reference.md).
+고급 사용법은 [reference.md](reference.md) 참조.
 
-Run the helper script:
+헬퍼 스크립트 실행:
 \`\`\`bash
 python scripts/helper.py input.txt
 \`\`\`
 ```
 
-### Step 8: Validate the Skill
+### 8단계: 스킬 검증
 
-Check these requirements:
+다음 요구사항을 확인합니다:
 
-✅ **File structure**:
-- [ ] SKILL.md exists in correct location
-- [ ] Directory name matches frontmatter `name`
+✅ **파일 구조**:
+- [ ] SKILL.md가 올바른 위치에 존재
+- [ ] 디렉토리명이 frontmatter `name`과 일치
 
 ✅ **YAML frontmatter**:
-- [ ] Opening `---` on line 1
-- [ ] Closing `---` before content
-- [ ] Valid YAML (no tabs, correct indentation)
-- [ ] `name` follows naming rules
-- [ ] `description` is specific and < 1024 chars
+- [ ] 첫 줄에 `---` 시작
+- [ ] 내용 전에 `---` 종료
+- [ ] 유효한 YAML (탭 없음, 올바른 들여쓰기)
+- [ ] `name`이 명명 규칙 준수
+- [ ] `description`이 구체적이고 1024자 미만
 
-✅ **Content quality**:
-- [ ] Clear instructions for Claude
-- [ ] Concrete examples provided
-- [ ] Edge cases handled
-- [ ] Dependencies listed (if any)
+✅ **내용 품질**:
+- [ ] Claude를 위한 명확한 지침
+- [ ] 구체적인 예시 제공
+- [ ] 예외 상황 처리
+- [ ] 의존성 나열 (해당 시)
 
-✅ **Testing**:
-- [ ] Description matches user questions
-- [ ] Skill activates on relevant queries
-- [ ] Instructions are clear and actionable
+✅ **테스트**:
+- [ ] 설명이 사용자 질문과 일치
+- [ ] 관련 쿼리에 스킬 활성화
+- [ ] 지침이 명확하고 실행 가능
 
-### Step 9: Test the Skill
+### 9단계: 스킬 테스트
 
-1. **Restart Claude Code** (if running) to load the Skill
+1. **Claude Code 재시작** (실행 중인 경우) - 스킬 로드
 
-2. **Ask relevant questions** that match the description:
+2. **설명과 일치하는 관련 질문**:
    ```
-   Can you help me extract text from this PDF?
+   이 PDF에서 텍스트 추출해줄 수 있어?
    ```
 
-3. **Verify activation**: Claude should use the Skill automatically
+3. **활성화 확인**: Claude가 자동으로 스킬 사용
 
-4. **Check behavior**: Confirm Claude follows the instructions correctly
+4. **동작 확인**: Claude가 지침을 올바르게 따르는지 확인
 
-### Step 10: Debug if needed
+### 10단계: 필요시 디버그
 
-If Claude doesn't use the Skill:
+Claude가 스킬을 사용하지 않는 경우:
 
-1. **Make description more specific**:
-   - Add trigger words
-   - Include file types
-   - Mention common user phrases
+1. **설명을 더 구체적으로**:
+   - 트리거 단어 추가
+   - 파일 유형 포함
+   - 일반적인 사용자 표현 언급
 
-2. **Check file location**:
+2. **파일 위치 확인**:
    ```bash
-   ls ~/.claude/skills/skill-name/SKILL.md
-   ls .claude/skills/skill-name/SKILL.md
+   ls ~/.claude/skills/스킬명/SKILL.md
+   ls .agent/skills/스킬명/SKILL.md
    ```
 
-3. **Validate YAML**:
+3. **YAML 검증**:
    ```bash
    cat SKILL.md | head -n 10
    ```
 
-4. **Run debug mode**:
+4. **디버그 모드 실행**:
    ```bash
    claude --debug
    ```
 
-## Common patterns
+## 일반적인 패턴
 
-### Read-only Skill
+### 읽기 전용 스킬
 
 ```yaml
 ---
 name: code-reader
-description: Read and analyze code without making changes. Use for code review, understanding codebases, or documentation.
+description: 변경 없이 코드를 읽고 분석합니다. 코드 리뷰, 코드베이스 이해, 문서화에 사용합니다.
 allowed-tools: Read, Grep, Glob
 ---
 ```
 
-### Script-based Skill
+### 스크립트 기반 스킬
 
 ```yaml
 ---
 name: data-processor
-description: Process CSV and JSON data files with Python scripts. Use when analyzing data files or transforming datasets.
+description: Python 스크립트로 CSV 및 JSON 데이터 파일을 처리합니다. 데이터 파일 분석 또는 데이터셋 변환 시 사용합니다.
 ---
 
-# Data Processor
+# 데이터 처리기
 
-## Instructions
+## 지침
 
-1. Use the processing script:
+1. 처리 스크립트 사용:
 \`\`\`bash
 python scripts/process.py input.csv --output results.json
 \`\`\`
 
-2. Validate output with:
+2. 출력 검증:
 \`\`\`bash
 python scripts/validate.py results.json
 \`\`\`
 ```
 
-### Multi-file Skill with progressive disclosure
+### 점진적 공개가 있는 다중 파일 스킬
 
 ```yaml
 ---
 name: api-designer
-description: Design REST APIs following best practices. Use when creating API endpoints, designing routes, or planning API architecture.
+description: 모범 사례에 따라 REST API를 설계합니다. API 엔드포인트 생성, 라우트 설계, API 아키텍처 계획 시 사용합니다.
 ---
 
-# API Designer
+# API 설계자
 
-Quick start: See [examples.md](examples.md)
+빠른 시작: [examples.md](examples.md) 참조
 
-Detailed reference: See [reference.md](reference.md)
+상세 참조: [reference.md](reference.md) 참조
 
-## Instructions
+## 지침
 
-1. Gather requirements
-2. Design endpoints (see examples.md)
-3. Document with OpenAPI spec
-4. Review against best practices (see reference.md)
+1. 요구사항 수집
+2. 엔드포인트 설계 (examples.md 참조)
+3. OpenAPI 스펙으로 문서화
+4. 모범 사례 검토 (reference.md 참조)
 ```
 
-## Best practices for Skill authors
+## 스킬 작성자를 위한 모범 사례
 
-1. **One Skill, one purpose**: Don't create mega-Skills
-2. **Specific descriptions**: Include trigger words users will say
-3. **Clear instructions**: Write for Claude, not humans
-4. **Concrete examples**: Show real code, not pseudocode
-5. **List dependencies**: Mention required packages in description
-6. **Test with teammates**: Verify activation and clarity
-7. **Version your Skills**: Document changes in content
-8. **Use progressive disclosure**: Put advanced details in separate files
+1. **하나의 스킬, 하나의 목적**: 거대한 스킬 만들지 않기
+2. **구체적인 설명**: 사용자가 말할 트리거 단어 포함
+3. **명확한 지침**: 사람이 아닌 Claude를 위해 작성
+4. **구체적인 예시**: 의사 코드가 아닌 실제 코드
+5. **의존성 나열**: 필요한 패키지를 설명에 언급
+6. **팀원과 테스트**: 활성화와 명확성 확인
+7. **스킬 버전 관리**: 내용 변경사항 문서화
+8. **점진적 공개 사용**: 고급 세부사항은 별도 파일에
 
-## Validation checklist
+## 검증 체크리스트
 
-Before finalizing a Skill, verify:
+스킬 완성 전 확인:
 
-- [ ] Name is lowercase, hyphens only, max 64 chars
-- [ ] Description is specific and < 1024 chars
-- [ ] Description includes "what" and "when"
-- [ ] YAML frontmatter is valid
-- [ ] Instructions are step-by-step
-- [ ] Examples are concrete and realistic
-- [ ] Dependencies are documented
-- [ ] File paths use forward slashes
-- [ ] Skill activates on relevant queries
-- [ ] Claude follows instructions correctly
+- [ ] name이 소문자, 하이픈만, 최대 64자
+- [ ] description이 구체적이고 1024자 미만
+- [ ] description에 "무엇"과 "언제" 포함
+- [ ] YAML frontmatter가 유효함
+- [ ] 지침이 단계별로 구성됨
+- [ ] 예시가 구체적이고 현실적임
+- [ ] 의존성이 문서화됨
+- [ ] 파일 경로에 슬래시 사용
+- [ ] 관련 쿼리에 스킬 활성화됨
+- [ ] Claude가 지침을 올바르게 따름
 
-## Troubleshooting
+## 문제 해결
 
-**Skill doesn't activate**:
-- Make description more specific with trigger words
-- Include file types and operations in description
-- Add "Use when..." clause with user phrases
+**스킬이 활성화되지 않음**:
+- 트리거 단어로 설명을 더 구체적으로
+- 파일 유형과 작업을 설명에 포함
+- 사용자 표현과 함께 "~할 때 사용" 절 추가
 
-**Multiple Skills conflict**:
-- Make descriptions more distinct
-- Use different trigger words
-- Narrow the scope of each Skill
+**여러 스킬이 충돌함**:
+- 설명을 더 구별되게
+- 다른 트리거 단어 사용
+- 각 스킬의 범위 좁히기
 
-**Skill has errors**:
-- Check YAML syntax (no tabs, proper indentation)
-- Verify file paths (use forward slashes)
-- Ensure scripts have execute permissions
-- List all dependencies
+**스킬에 오류 있음**:
+- YAML 문법 확인 (탭 없음, 적절한 들여쓰기)
+- 파일 경로 확인 (슬래시 사용)
+- 스크립트에 실행 권한 있는지 확인
+- 모든 의존성 나열
 
-## Examples
+## 예시
 
-See the documentation for complete examples:
-- Simple single-file Skill (commit-helper)
-- Skill with tool permissions (code-reviewer)
-- Multi-file Skill (pdf-processing)
+완전한 예시는 문서 참조:
+- 간단한 단일 파일 스킬 (commit-helper)
+- 도구 권한이 있는 스킬 (code-reviewer)
+- 다중 파일 스킬 (pdf-processing)
 
-## Output format
+## 출력 형식
 
-When creating a Skill, I will:
+스킬 생성 시, 다음을 수행합니다:
 
-1. Ask clarifying questions about scope and requirements
-2. Suggest a Skill name and location
-3. Create the SKILL.md file with proper frontmatter
-4. Include clear instructions and examples
-5. Add supporting files if needed
-6. Provide testing instructions
-7. Validate against all requirements
+1. 범위와 요구사항에 대해 명확한 질문
+2. 스킬 이름과 위치 제안
+3. 적절한 frontmatter로 SKILL.md 파일 생성
+4. 명확한 지침과 예시 포함
+5. 필요시 지원 파일 추가
+6. 테스트 지침 제공
+7. 모든 요구사항에 대해 검증
 
-The result will be a complete, working Skill that follows all best practices and validation rules.
+결과물은 모든 모범 사례와 검증 규칙을 따르는 완전하고 작동하는 스킬입니다.

@@ -99,19 +99,19 @@ Draft → Review → Approved → Deprecated
 ## 7. 스킬/에이전트 사용
 
 ### 스킬 (단일 작업)
-| 스킬 | 사용 시점 |
-|------|----------|
-| `skills/process-analyzer.md` | 프로세스 문서 분석 요청 시 |
-| `skills/governance-auditor.md` | RACI/변경통제 검증 요청 시 |
-| `skills/process-designer.md` | 새 프로세스 설계 요청 시 |
-| `skills/process-documenter.md` | 프로세스 문서화 요청 시 |
+| 스킬 | 사용 시점 | 트리거 |
+|------|----------|--------|
+| `skills/process-analyzer/SKILL.md` | 프로세스 문서 분석 요청 시 | "분석해줘", "문제점 찾아줘" |
+| `skills/governance-auditor/SKILL.md` | RACI/변경통제 검증 요청 시 | "검증해줘", "감사해줘" |
+| `skills/process-designer/SKILL.md` | 새 프로세스 설계 요청 시 | "설계해줘", "프로세스 만들어줘" |
+| `skills/process-documenter/SKILL.md` | 프로세스 문서화 요청 시 | "문서화해줘", "정리해줘" |
 
 ### 에이전트 (복합 작업)
-| 에이전트 | 사용 시점 |
-|----------|----------|
-| `agents/process-architect.md` | 프로세스 분석/설계 총괄 |
-| `agents/documentation.md` | 문서화/체계 관리 |
-| `agents/improvement.md` | 개선 사이클 관리 |
+| 에이전트 | 사용 시점 | 트리거 |
+|----------|----------|--------|
+| `agents/process-architect.md` | 프로세스 분석/설계 총괄 | "전체 검토", "종합 설계" |
+| `agents/documentation.md` | 문서화/체계 관리 | "표준 문서로 정리" |
+| `agents/improvement.md` | 개선 사이클 관리 | "프로세스 개선", "최적화" |
 
 ---
 
