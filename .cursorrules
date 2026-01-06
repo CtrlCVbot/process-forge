@@ -1,0 +1,71 @@
+# Process Forge Rules for Cursor
+
+이 프로젝트는 운영 프로세스를 설계·검증·문서화하는 메타 시스템입니다.
+
+---
+
+## 규칙 참조
+
+모든 작업 시 `.agent/` 폴더의 규칙을 따르세요:
+
+| 파일 | 내용 |
+|------|------|
+| `.agent/MASTER.md` | 마스터 규칙 (최상위 원칙) |
+| `.agent/rules/document-schema.md` | docId 네이밍, 문서 유형 |
+| `.agent/rules/ownership.md` | 소유권, RACI 규칙 |
+| `.agent/rules/change-control.md` | 변경 통제 프로세스 |
+
+---
+
+## 핵심 원칙
+
+### 1. Adoption First
+- 정착 가능성 우선
+- 실제 사용될 수 있는 문서 작성
+
+### 2. Single Owner
+- 모든 문서는 개인 1명 책임
+- 팀/부서가 아닌 특정인에게 귀속
+
+### 3. Change Control
+- Approved 문서는 CHG(변경요청)로만 변경
+- 직접 수정 금지
+
+---
+
+## 문서 유형
+
+| 접두사 | 유형 | 질문 |
+|--------|------|------|
+| POL | 정책 | Why? (왜 해야 하는가) |
+| PRC | 프로세스 | How? (어떻게 수행하는가) |
+| RUL | 규칙 | What? (무엇을 해야 하는가) |
+| CHG | 변경요청 | 무엇을 왜 바꾸는가 |
+
+---
+
+## 문서 작업 시
+
+### 새 문서 생성
+1. 템플릿 확인: `.agent/templates/`
+2. docId 규칙 확인: `.agent/rules/document-schema.md`
+3. Owner 지정 필수
+
+### 기존 문서 수정
+1. 문서 상태 확인 (Draft / Approved)
+2. Approved면 CHG 문서 생성 필요
+3. 변경 이력 기록
+
+---
+
+## 폴더 구조
+
+```
+.agent/           # 규칙/스킬/에이전트 중앙 저장소
+docs/             # 산출물 저장소
+├── policies/     # POL-* 정책 문서
+├── processes/    # PRC-* 프로세스 문서
+├── rules/        # RUL-* 규칙 문서
+├── changes/      # CHG-* 변경 요청
+└── archive/      # 폐기 문서
+```
